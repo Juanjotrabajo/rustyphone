@@ -1,5 +1,6 @@
 use std::io;
 use regex::Regex;
+use std::env;
 
 struct PhoneEntry {
     name: String,
@@ -7,6 +8,7 @@ struct PhoneEntry {
 }
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
     let exit_string = String::from("exit");
     let exit_regex = Regex::new(".*exit.*").unwrap();
     let print_regex = Regex::new(".*print.*").unwrap();
@@ -25,6 +27,16 @@ fn main() {
         number: "626028627".to_string(),
     };
     let phone_entries_list = [phoneentry1,phoneentry2];
+
+    let no_interactive = String::from("no_interactive");
+//    let arg1 = args[0];
+    println!("Argumento: {}",args[1]);
+    if args[1] == no_interactive {
+//        println!("No interactive");
+        std::process::exit(1);
+        //return Err ("Leaving app".into());
+    }
+
 
     while !(user_input.to_lowercase().contains (&exit_string)) {
     io::stdin()
@@ -45,5 +57,4 @@ fn main() {
     }
     }
 }
-
 
